@@ -1,4 +1,6 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
 from .models import Student
 import random
 
@@ -7,5 +9,8 @@ import random
 def index(request): 
     return render(request, 'student_mgmt_system/index.html', {
         'students': Student.objects.all(),
-        'color': random.choice(["active", "primary", "secondary", "success", "danger", "warning", "info", "light", "dark"])
+        'colors': ["active", "primary", "secondary", "success", "danger", "warning", "info", "light", "dark"]
     })
+    
+def view_student(request, id):
+    return HttpResponseRedirect(reverse('index'))
