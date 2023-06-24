@@ -1,2 +1,4 @@
 .env
 git_token.txt
+*.pyc
+__pycache__/
