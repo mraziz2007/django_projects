@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        section{
+            padding: 60px 0;
+        }
+    </style>
+    <title>Active Directory Portal | {% block title %}{% endblock title %}</title>
+</head>
+<body>
+    <!-- Navbar Section -->
+    <section id="ad-navbar">
+        
+        <div class="container-md">
+            <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body fixed-top" data-bs-theme="dark">
+                <div class="container-md">
+                  <a class="navbar-brand" href="#intro">
+                    <span class="fw-bold" style="font-size: 1.5rem; color: cornflowerblue;">
+                        <i class="bi bi-people-fill"></i>
+                        <span class="text-light ">
+                          &ensp; 3INSYS ACTIVE DIRECTORY TOOL
+                        </span>
+                    </span>
+                  </a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="{% url 'portalchangepassword' %}">Change Password</a>
+                      </li>
+                      <li class="nav-item d-none d-md-block">
+                        <a class="btn btn-primary">
+                        <i class="bi bi-envelope"></i> 
+                        &nbsp; Contact Support
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="{% url 'user_logout' %}" class="btn btn-lg">
+                        <i class="bi bi-box-arrow-right"></i>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </nav>
+        </div>
+        
+    </section>
+    
+    <section id="my_tabs">
+        <div class="container-md">
+          {% if user.is_authenticated %}
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active fw-bold" id="all_users-tab" data-bs-toggle="tab" data-bs-target="#all_users-tab-pane" type="button" role="tab" aria-controls="all_users-tab-pane" aria-selected="true">Users - Info</a>
+              </li>
+              {% if not not_authorized %}
+              <li class="nav-item">
+                <a class="nav-link fw-bold" id="groups-tab" data-bs-toggle="tab" data-bs-target="#groups-tab-pane" type="button" role="tab" aria-controls="groups-tab-pane" aria-selected="false">Groups - Info</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link fw-bold" id="domain_info-tab" data-bs-toggle="tab" data-bs-target="#domain_info-tab-pane" type="button" role="tab" aria-controls="domain_info-tab-pane" aria-selected="false">Domain Info</a>
+              </li>
+              {% endif %}
+            </ul>
+            {% else %}
+            <div class="container-md my-5">
+              <div class="text-center">
+                  <span class="display-6 fw-bold">
+                      Unauthorized Access is Prohibited!
+                  </span>
+                  <div class="container-md">
+                      <div class="row justify-content-center">
+                          <div class="col col-md-8">
+                              <p class="lead mt-5"> Please logged in to use this tool. </p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            {% endif %}
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="all_users-tab-pane" role="tabpanel" aria-labelledby="all_users-tab" tabindex="0">{% block all_users_tab %}{% endblock all_users_tab %}</div>
+              <div class="tab-pane fade" id="groups-tab-pane" role="tabpanel" aria-labelledby="groups-tab" tabindex="0">{% include 'users_reports/tabs.html' with members=admin_group_members only %}</div>
+              <div class="tab-pane fade" id="domain_info-tab-pane" role="tabpanel" aria-labelledby="domain_info-tab" tabindex="0">{% block domain_info_tab %}{% endblock domain_info_tab %}</div>
+              
+            </div>
+          </div>  
+    </section>
+
+    
+    <footer class="bg-dark text-light py-5 fixed-bottom">
+
+        <figure class="text-center">
+            <blockquote class="blockquote">
+              <p>3INSYS - Los Angeles, CA USA</p>
+            </blockquote>
+            <figcaption class="blockquote-footer">
+                Developed by &copy; <script>document.write(new Date().getFullYear())</script> Aziz Shukuri
+            </figcaption>
+          </figure>
+        </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+  </body>
+</html>

@@ -1,0 +1,57 @@
+{% load widget_tweaks %}
+<!-- Model for lock account -->
+<div class="modal fade" id="lockstatusmodal{{user.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Set Unlock Status for {{user.user_full_name}}'s Account</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="post" id="lockstatusmodal{{user.id}}">
+            {% csrf_token %}
+            <input type="hidden" name="user_input" id="user_input" aria-label="user_input" value="{{user.user_full_name}}" aria-describedby="basic-addon1" class+="form-control">
+            <input type="hidden" name="user_dn" id="user_dn" aria-label="user_dn" value="{{user.user_dn}}" aria-describedby="basic-addon1" class+="form-control">
+            
+            <div class="form-check mb-3">
+              {% render_field accountsetlockstatusform.set_unlock_status type="checkbox" name="set_unlock_status" id="flexCheckDefault2" class+="form-check-input" %}
+              <label class="form-check-label" for="flexCheckDefault2">
+                Unlock
+              </label>
+            </div>
+                
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+<!-- Model for unlocked account -->
+<div class="modal fade" id="unlockstatusmodal{{user.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Unlock Status for {{user.user_full_name}}'s Account</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label class="form-check-label">
+          The account is at unlocked state. No action is needed.
+        </label>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+  
+
+ 

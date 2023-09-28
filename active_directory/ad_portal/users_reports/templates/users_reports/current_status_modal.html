@@ -1,0 +1,66 @@
+{% load widget_tweaks %}
+<!-- Model Current Activated Account -->
+<div class="modal fade" id="currentactivatedstatusmodal{{user.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Set Status for {{user.user_full_name}}'s Account</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="post" id="changePassword{{user.id}}" oninput='confirm_password.setCustomValidity(confirm_password.value != new_password.value ? "Passwords do not match." : "")'>
+            {% csrf_token %}
+            <input type="hidden" name="user_input" id="user_input" aria-label="user_input" value="{{user.user_full_name}}" aria-describedby="basic-addon1" class+="form-control">
+            <input type="hidden" name="user_dn" id="user_dn" aria-label="user_dn" value="{{user.user_dn}}" aria-describedby="basic-addon1" class+="form-control">
+            
+            <div class="form-check mb-3">
+              {% render_field accountsetstatusform.set_deactivate_status type="checkbox" name="account_set_status" id="flexCheckDefault" aria-label="account_set_status" aria-describedby="basic-addon1" class+="form-check-input" %}
+              <label class="form-check-label" for="flexCheckDefault">
+                Deactivate
+              </label>
+            </div>
+          </div>  
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+          </form>
+        
+        
+      </div>
+    </div>
+  </div>
+
+<!-- Model Current deactivated Account -->
+<div class="modal fade" id="currentdeactivatedstatusmodal{{user.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Set Status for {{user.user_full_name}}'s Account</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" id="changePassword{{user.id}}" oninput='confirm_password.setCustomValidity(confirm_password.value != new_password.value ? "Passwords do not match." : "")'>
+          {% csrf_token %}
+          <input type="hidden" name="user_input" id="user_input" aria-label="user_input" value="{{user.user_full_name}}" aria-describedby="basic-addon1" class+="form-control">
+          <input type="hidden" name="user_dn" id="user_dn" aria-label="user_dn" value="{{user.user_dn}}" aria-describedby="basic-addon1" class+="form-control">
+          
+          <div class="form-check mb-3">
+            {% render_field accountsetstatusform.set_activate_status type="checkbox" name="account_set_status" id="flexCheckDefault" aria-label="account_set_status" aria-describedby="basic-addon1" class+="form-check-input" %}
+            <label class="form-check-label" for="flexCheckDefault">
+              Activate
+            </label>
+          </div>
+        </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+      
+      
+    </div>
+  </div>
+</div>
+
+ 
