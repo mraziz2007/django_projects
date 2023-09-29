@@ -1,0 +1,19 @@
+version: '3.9'
+
+services:
+  ad-app:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8889:8889"
+    container_name: ad_app
+    env_file: env/ad.env
+    volumes:
+      - /home/netadmin/Desktop/django_projects/active_directory/ad_portal/db.sqlite3:/ad_app/db.sqlite3:rw
+    networks:
+      - ad-app
+
+networks:
+  ad-app:
